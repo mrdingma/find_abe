@@ -37,6 +37,14 @@ const App = props => {
     return keyword !== null ? `q=${keyword}` : false;
   };
 
+  const cat1Builder = () => {
+    return cat1 !== null ? `category1=${cat1}` : false;
+  };
+
+  const cat2Builder = () => {
+    return cat2 !== null ? `category2=${cat2}` : false;
+  };
+
   const resetSearch = () => {
     setYear(null);
     setMonth(null);
@@ -51,6 +59,14 @@ const App = props => {
 
     if (dateBuilder()) {
       queries.unshift(dateBuilder());
+    }
+
+    if (cat1Builder()) {
+      queries.unshift(cat1Builder());
+    }
+
+    if (cat2Builder()) {
+      queries.unshift(cat2Builder());
     }
 
     if (keywordBuilder()) {
