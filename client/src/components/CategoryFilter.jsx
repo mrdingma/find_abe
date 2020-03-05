@@ -9,13 +9,13 @@ const CategoryFilter = ({ cat1, setCat1, cat2, setCat2, dataArr }) => {
       dataArr.forEach(({ category1 }) => {
         hash[category1] = 1;
       });
+      return Object.keys(hash);
     } else {
       dataArr.forEach(({ category2 }) => {
         hash[category2] = 1;
       });
+      return Object.keys(hash).length < 2 ? false : Object.keys(hash);
     }
-
-    return Object.keys(hash).length < 2 ? false : Object.keys(hash);
   };
 
   let content = (
