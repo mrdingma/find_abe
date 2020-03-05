@@ -6,7 +6,7 @@ const SearchBar = props => {
   const [text, setText] = useState(props.keyword);
 
   const clickHandler = () => {
-    console.log(text);
+    props.resetSearch();
     props.setKeyword(text);
   };
 
