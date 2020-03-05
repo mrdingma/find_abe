@@ -128,6 +128,22 @@ const App = props => {
   if (!homePage && !isLoading) {
     content = (
       <>
+        <div>
+          <img
+            style={{ position: "absolute", top: "22%", left: "3%" }}
+            src="logo2.png"
+          />
+          <img
+            className="topHat"
+            src="hat.png"
+            style={{
+              width: "9%",
+              top: "10%",
+              left: "3%",
+              position: "absolute"
+            }}
+          />
+        </div>
         <Container style={{ marginTop: "35px" }}>
           <Row>
             <SearchBar
