@@ -48,7 +48,7 @@ const EventEntry = ({ event }) => {
 
   let content = (
     <div style={{ margin: "20px", fontSize: "16px", width: "100%" }}>
-      <div>{event.date}</div>
+      <div style={{ fontWeight: "bold" }}>Date: {event.date}</div>
       <div>{description}</div>
     </div>
   );
@@ -62,7 +62,7 @@ const EventEntry = ({ event }) => {
         overlay={popover}
       >
         <div style={{ margin: "20px", fontSize: "16px", width: "100%" }}>
-          <div>{event.date}</div>
+          <div style={{ fontWeight: "bold" }}>Date: {event.date}</div>
           <div>{description}</div>
         </div>
       </OverlayTrigger>

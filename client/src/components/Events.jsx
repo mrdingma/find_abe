@@ -10,8 +10,14 @@ const Events = ({ dataArr }) => {
 
   const pageNumberArr = () => {
     let result = [];
+    let start = 1;
+    let end = Math.min(maxPage, Math.max(currentPage + 4, 10));
 
-    for (let i = 1; i <= maxPage; i++) {
+    if (currentPage - 5 > 0) {
+      start = currentPage - 5;
+    }
+
+    for (let i = start; i <= end; i++) {
       result.push(i);
     }
     return result;
@@ -22,10 +28,13 @@ const Events = ({ dataArr }) => {
   if (len > 0) {
     content = (
       <>
+        <div style={{ marginLeft: "20px", fontSize: "12px" }}>
+          Page {currentPage} of about {len} results
+        </div>
         {dataArr.slice((currentPage - 1) * 5, currentPage * 5).map(event => (
           <EventEntry event={event} />
         ))}
-        <Pagination>
+        <Pagination style={{ marginTop: "5%", marginLeft: "25%" }}>
           {currentPage !== 1 ? (
             <>
               <Pagination.First onClick={() => setCurrentPage(1)} />
@@ -36,9 +45,17 @@ const Events = ({ dataArr }) => {
           ) : null}
           {pageNumberArr().map(number => {
             if (number === currentPage) {
-              return <Pagination.Item active>{number}</Pagination.Item>;
+              return (
+                <Pagination.Item onClick={() => setCurrentPage(number)} active>
+                  {number}
+                </Pagination.Item>
+              );
             }
-            return <Pagination.Item>{number}</Pagination.Item>;
+            return (
+              <Pagination.Item onClick={() => setCurrentPage(number)}>
+                {number}
+              </Pagination.Item>
+            );
           })}
           {currentPage !== maxPage ? (
             <>
@@ -46,7 +63,6 @@ const Events = ({ dataArr }) => {
                 onClick={() => setCurrentPage(currentPage + 1)}
               />
               <Pagination.Last onClick={() => setCurrentPage(maxPage)} />
-              />
             </>
           ) : null}
         </Pagination>
