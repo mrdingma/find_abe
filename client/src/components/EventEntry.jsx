@@ -34,7 +34,10 @@ const EventEntry = ({ event }) => {
   );
 
   let content = (
-    <div style={{ margin: "20px", fontSize: "16px" }}>{description}</div>
+    <div style={{ margin: "20px", fontSize: "16px" }}>
+      <div>{event.date}</div>
+      <div>{description}</div>
+    </div>
   );
 
   if (url) {
@@ -45,7 +48,10 @@ const EventEntry = ({ event }) => {
         delay={{ show: 300, hide: 400 }}
         overlay={popover}
       >
-        <div style={{ margin: "20px", fontSize: "16px" }}>{description}</div>
+        <div style={{ margin: "20px", fontSize: "16px" }}>
+          <div>{event.date}</div>
+          <div>{description}</div>
+        </div>
       </OverlayTrigger>
     );
   }
