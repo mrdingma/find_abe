@@ -28,10 +28,7 @@ const App = props => {
 
   const dateBuilder = () => {
     if (month !== null && day !== null) {
-      return `${year}/${month}/${day}`;
-    }
-    if (year !== null) {
-      return year;
+      return `date=${year}/${month}/${day}`;
     }
     return false;
   };
@@ -40,30 +37,31 @@ const App = props => {
     return keyword !== null ? `q=${keyword}` : false;
   };
 
-  const clearSearch = () => {
+  const resetSearch = () => {
     setYear(null);
     setMonth(null);
     setDay(null);
+    setCat1(null);
+    setCat2(null);
   };
 
-  console.log(dataArr);
-
   const getAll = () => {
-    const url = `/events?`;
+    let url = `/events?`;
     const queries = ["_sort=dates", "_order=asc"];
 
     if (dateBuilder()) {
-      queries.push(dateBuilder());
+      queries.unshift(dateBuilder());
     }
 
     if (keywordBuilder()) {
-      queries.push(keywordBuilder());
+      queries.unshift(keywordBuilder());
     }
 
-    console.log(url);
+    url += queries.join("&");
+
     setIsLoading(true);
     axios
-      .get(`${url}${queries.join("&")}`)
+      .get(url)
       .then(({ data }) => {
         setDataArr(data);
         setHomePage(false);
@@ -101,6 +99,7 @@ const App = props => {
         </Container>
         <div>
           <SearchBar
+            resetSearch={resetSearch}
             keyword={keyword}
             setKeyword={setKeyword}
             isLoading={isLoading}
@@ -116,6 +115,7 @@ const App = props => {
         <Container style={{ marginTop: "35px" }}>
           <Row>
             <SearchBar
+              resetSearch={resetSearch}
               keyword={keyword}
               setKeyword={setKeyword}
               isLoading={isLoading}
