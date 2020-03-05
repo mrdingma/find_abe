@@ -4,6 +4,7 @@ import { OverlayTrigger, Popover } from "react-bootstrap";
 const EventEntry = ({ event }) => {
   const stringParser = string => {
     let description = "";
+    let url = "";
     const citeStart = string.indexOf("{");
 
     if (citeStart !== -1) {
@@ -12,9 +13,21 @@ const EventEntry = ({ event }) => {
       description = string;
     }
 
+    const citeStart2 = description.indexOf("<");
+
+    if (citeStart2 !== -1) {
+      description = description.slice(0, citeStart2);
+    }
+
+    if (string.match(/(?<=>)htt(.)+?(?=<)/gi)) {
+      url = string.match(/(?<=>)htt(.)+?(?=<)/gi);
+    } else {
+      url = [];
+    }
+
     return {
       description,
-      url: string.match(/http(.)+?(?=\")/gi).filter(a => !a.includes("<"))
+      url
     };
   };
 
@@ -34,13 +47,13 @@ const EventEntry = ({ event }) => {
   );
 
   let content = (
-    <div style={{ margin: "20px", fontSize: "16px" }}>
+    <div style={{ margin: "20px", fontSize: "16px", width: "100%" }}>
       <div>{event.date}</div>
       <div>{description}</div>
     </div>
   );
 
-  if (url) {
+  if (url.length > 0) {
     content = (
       <OverlayTrigger
         placement="right"
@@ -48,7 +61,7 @@ const EventEntry = ({ event }) => {
         delay={{ show: 300, hide: 400 }}
         overlay={popover}
       >
-        <div style={{ margin: "20px", fontSize: "16px" }}>
+        <div style={{ margin: "20px", fontSize: "16px", width: "100%" }}>
           <div>{event.date}</div>
           <div>{description}</div>
         </div>
