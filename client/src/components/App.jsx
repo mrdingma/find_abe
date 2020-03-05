@@ -130,7 +130,12 @@ const App = props => {
       <>
         <div>
           <img
-            style={{ position: "absolute", top: "22%", left: "3%" }}
+            style={{
+              position: "absolute",
+              top: "13%",
+              left: "50%",
+              width: "10%"
+            }}
             src="logo2.png"
           />
           <img
@@ -138,13 +143,13 @@ const App = props => {
             src="hat.png"
             style={{
               width: "9%",
-              top: "10%",
-              left: "3%",
+              top: "2%",
+              left: "50%",
               position: "absolute"
             }}
           />
         </div>
-        <Container style={{ marginTop: "35px" }}>
+        <Container style={{ marginTop: "20%" }}>
           <Row>
             <SearchBar
               resetSearch={resetSearch}
